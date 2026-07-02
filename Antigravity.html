@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="DarkGrid — Estudio creativo de diseño y desarrollo web. Soluciones digitales premium para marcas que buscan resultados reales.">
+  <title>DarkGrid — Diseño y Desarrollo Web Premium | PFO2</title>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ===== RESET Y BASE ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1.75;
+      color: #c0c0c0;
+      background-color: #18181b;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      /* Compensar top-banner (36px) + header (64px) */
+      padding-top: 100px;
+    }
+
+    /* ===== TIPOGRAFÍA ===== */
+    h1, h2 {
+      color: #ffffff;
+    }
+
+    h1 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    h3 {
+      font-weight: 500;
+      color: #c0c0c0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ===== FOCUS VISIBLE — ACCESIBILIDAD ===== */
+    :focus-visible {
+      outline: 2px solid #0099ff;
+      outline-offset: 2px;
+    }
+
+    /* ===== UTILIDADES ===== */
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-label {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-line {
+      display: block;
+      width: 32px;
+      height: 2px;
+      background-color: #0099ff;
+      margin-bottom: 3rem;
+    }
+
+    /* ===== SECCIÓN: TOP BANNER ===== */
+    .top-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 36px;
+      background-color: #6b1b6b;
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .top-banner-inner {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .top-banner-text {
+      font-size: 0.8rem;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .top-banner-text strong {
+      font-weight: 700;
+      margin-right: 0.4rem;
+    }
+
+    .top-banner-btn {
+      font-size: 0.72rem;
+      color: #ffffff;
+      border: 1px solid #ffffff;
+      background: transparent;
+      padding: 0.15rem 0.65rem;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: inherit;
+      transition: background-color 0.2s ease;
+    }
+
+    .top-banner-btn:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .top-banner-badge {
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ===== SECCIÓN: HEADER FIJO ===== */
+    .site-header {
+      position: fixed;
+      top: 36px;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: #18181b;
+      border-bottom: 1px solid #2e2e32;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      gap: 1.5rem;
+    }
+
+    /* Logo monoespaciado */
+    .logo {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      color: #0099ff;
+      font-size: 1rem;
+    }
+
+    /* Navegación desktop */
+    .nav-list {
+      display: flex;
+      list-style: none;
+      gap: 1.75rem;
+      flex-shrink: 0;
+    }
+
+    .nav-list a {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: #a0a0a0;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-list a:hover {
+      color: #ffffff;
+      border-bottom-color: #0099ff;
+    }
+
+    /* Barra de búsqueda decorativa */
+    .search-bar {
+      position: relative;
+      flex-shrink: 1;
+      min-width: 0;
+      max-width: 220px;
+      width: 100%;
+    }
+
+    .search-bar input {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.06);
+      border: 1px solid #2e2e32;
+      border-radius: 6px;
+      padding: 0.4rem 2rem 0.4rem 0.75rem;
+      font-size: 0.82rem;
+      color: #a0a0a0;
+      font-family: inherit;
+      transition: border-color 0.2s ease;
+    }
+
+    .search-bar input::placeholder {
+      color: #6b6b6b;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: #0099ff;
+    }
+
+    .search-bar-icon {
+      position: absolute;
+      right: 0.65rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #6b6b6b;
+      font-size: 0.78rem;
+      pointer-events: none;
+    }
+
+    /* Botón hamburguesa */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background-color: #f0f0f0;
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .hamburger[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .hamburger[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ===== SECCIÓN: HERO ===== */
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 100px);
+      display: flex;
+      align-items: center;
+      background-color: #18181b;
+      overflow: hidden;
+    }
+
+    /* Elemento decorativo ASCII art derecho */
+    .hero-ascii {
+      position: absolute;
+      right: 4%;
+      top: 50%;
+      transform: translateY(-50%) rotate(15deg);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.7rem;
+      line-height: 1.35;
+      color: #2e2e32;
+      white-space: pre;
+      pointer-events: none;
+      user-select: none;
+      opacity: 0.6;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 660px;
+    }
+
+    .hero-eyebrow {
+      display: block;
+      width: 40px;
+      height: 2px;
+      background-color: #0099ff;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: #c0c0c0;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      max-width: 540px;
+    }
+
+    .hero-subtitle .highlight {
+      color: #0099ff;
+    }
+
+    /* Botones CTA */
+    .btn-primary {
+      display: inline-block;
+      background-color: #0099ff;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.85rem 2rem;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: rgba(0, 153, 255, 0.85);
+      box-shadow: 0 0 16px rgba(0, 153, 255, 0.25);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid #ffffff;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.85rem 2rem;
+      border-radius: 4px;
+      background: transparent;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background-color 0.25s ease;
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ===== SECCIÓN: HERO AD (PROMOCIONAL) ===== */
+    .hero-ad {
+      position: relative;
+      background: linear-gradient(to right, #18181b 0%, #8a2e8a 100%);
+      padding: 80px 0;
+      overflow: hidden;
+    }
+
+    .hero-ad-badge {
+      position: absolute;
+      top: 1.25rem;
+      right: 2rem;
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .hero-ad-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-ad-text h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-ad-text p {
+      font-size: 1rem;
+      color: #c0c0c0;
+      line-height: 1.75;
+      margin-bottom: 2rem;
+      max-width: 480px;
+    }
+
+    /* Formas glass */
+    .glass-shapes {
+      position: relative;
+      height: 280px;
+    }
+
+    .glass-rect-lg {
+      position: absolute;
+      width: 260px;
+      height: 160px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      top: 20px;
+      left: 20px;
+    }
+
+    .glass-rect-sm {
+      position: absolute;
+      width: 180px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      top: 100px;
+      left: 140px;
+    }
+
+    .glass-circle {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+      top: 40px;
+      left: 240px;
+    }
+
+    /* ===== SECCIÓN: SOBRE NOSOTROS ===== */
+    .about {
+      background-color: #1f1f23;
+      padding: 100px 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-content h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .about-content h3:first-of-type {
+      margin-top: 0;
+    }
+
+    .about-content p {
+      font-size: 0.95rem;
+      color: #a0a0a0;
+      line-height: 1.75;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      object-fit: cover;
+    }
+
+    /* ===== SECCIÓN: SERVICIOS ===== */
+    .services {
+      background-color: #18181b;
+      padding: 100px 0;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background-color: #1f1f23;
+      border: 1px solid #2e2e32;
+      border-radius: 6px;
+      overflow: hidden;
+      transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      border-color: #0099ff;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 24px rgba(0, 153, 255, 0.15);
+    }
+
+    .service-card-img {
+      width: 100%;
+      height: 160px;
+      overflow: hidden;
+    }
+
+    .service-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .service-card:hover .service-card-img img {
+      transform: scale(1.03);
+    }
+
+    .service-card-body {
+      padding: 1.5rem;
+    }
+
+    .service-icon-fa {
+      font-size: 1.25rem;
+      color: #0099ff;
+      margin-bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 6px;
+      background-color: rgba(0, 153, 255, 0.08);
+    }
+
+    .service-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 0.6rem;
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: #a0a0a0;
+      line-height: 1.7;
+    }
+
+    /* ===== SECCIÓN: TESTIMONIOS ===== */
+    .testimonials {
+      background-color: #1a1a1e;
+      padding: 100px 0;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .testimonial-card {
+      position: relative;
+      background-color: #1f1f23;
+      border: 1px solid #2e2e32;
+      border-radius: 6px;
+      padding: 1.75rem;
+    }
+
+    /* Comilla decorativa */
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 0.75rem;
+      right: 1.25rem;
+      font-size: 3.5rem;
+      line-height: 1;
+      color: rgba(0, 153, 255, 0.15);
+      font-family: Georgia, serif;
+      pointer-events: none;
+    }
+
+    .testimonial-text {
+      font-size: 0.92rem;
+      color: #a0a0a0;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .testimonial-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #0099ff;
+      flex-shrink: 0;
+    }
+
+    .testimonial-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .testimonial-role {
+      font-size: 0.8rem;
+      color: #6b6b6b;
+    }
+
+    /* ===== SECCIÓN: CONTACTO ===== */
+    .contact {
+      background-color: #18181b;
+      padding: 100px 0;
+    }
+
+    .contact-form {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .contact .section-label {
+      text-align: center;
+    }
+
+    .contact .section-line {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #a0a0a0;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.04);
+      border: 1px solid #2e2e32;
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      color: #f0f0f0;
+      font-size: 0.95rem;
+      font-family: inherit;
+      line-height: 1.5;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #6b6b6b;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #0099ff;
+      box-shadow: 0 0 0 3px rgba(0, 153, 255, 0.12);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .form-submit {
+      margin-top: 0.75rem;
+    }
+
+    .form-submit .btn-primary {
+      width: 100%;
+    }
+
+    /* ===== SECCIÓN: FOOTER ===== */
+    .site-footer {
+      background-color: #16161a;
+      border-top: 1px solid #2e2e32;
+      padding: 3rem 0 1.5rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-brand-name .logo-icon-footer {
+      color: #0099ff;
+      margin-right: 0.35rem;
+    }
+
+    .footer-desc {
+      font-size: 0.85rem;
+      color: #a0a0a0;
+      line-height: 1.65;
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.02em;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: #a0a0a0;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: #0099ff;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 1rem;
+      list-style: none;
+      margin-top: 0.25rem;
+    }
+
+    .footer-socials a {
+      color: #6b6b6b;
+      font-size: 1.2rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-socials a:hover {
+      color: #0099ff;
+    }
+
+    .footer-vercel {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: #6b6b6b;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+
+    .footer-vercel:hover {
+      color: #0099ff;
+    }
+
+    .footer-copy {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #6b6b6b;
+      border-top: 1px solid #2e2e32;
+      padding-top: 1.5rem;
+    }
+
+    /* ===== MENÚ MOBILE OVERLAY ===== */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 100px; /* banner 36px + header 64px */
+      left: 0;
+      width: 100%;
+      background-color: #1a1a1e;
+      z-index: 999;
+      border-bottom: 1px solid #2e2e32;
+    }
+
+    .mobile-nav.is-open {
+      display: block;
+    }
+
+    .mobile-nav-list {
+      list-style: none;
+      padding: 1rem 0;
+    }
+
+    .mobile-nav-list li {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .mobile-nav-list li:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-nav-list a {
+      display: block;
+      padding: 0.9rem 1.5rem;
+      color: #a0a0a0;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .mobile-nav-list a:hover {
+      color: #ffffff;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 960px) {
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      .hero-ad-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .glass-shapes {
+        display: none;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-list,
+      .search-bar {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+      }
+
+      .hero-ascii {
+        display: none;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about,
+      .services,
+      .testimonials,
+      .contact,
+      .hero-ad {
+        padding: 80px 0;
+      }
+
+      .top-banner-btn,
+      .top-banner-badge {
+        display: none;
+      }
+
+      .top-banner-text {
+        font-size: 0.72rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== SECCIÓN: TOP BANNER ===== -->
+  <div class="top-banner" role="banner">
+    <div class="top-banner-inner">
+      <span class="top-banner-text">
+        <strong>DarkGrid</strong> Soluciones digitales premium — Diseño y Desarrollo Web Profesional
+      </span>
+      <button class="top-banner-btn" type="button">Explorar recursos</button>
+      <span class="top-banner-badge" aria-label="Proyecto PFO2">PFO2</span>
+    </div>
+  </div>
+
+  <!-- ===== SECCIÓN: HEADER FIJO ===== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Logo monoespaciado con ícono de código -->
+      <a href="#inicio" class="logo" aria-label="DarkGrid — Ir al inicio">
+        <i class="fas fa-code logo-icon" aria-hidden="true"></i>
+        DarkGrid
+      </a>
+
+      <!-- Navegación desktop -->
+      <nav aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="#inicio">Documentación</a></li>
+          <li><a href="#servicios">Guías</a></li>
+          <li><a href="#nosotros">Referencia</a></li>
+          <li><a href="#contacto">Acerca de</a></li>
+        </ul>
+      </nav>
+
+      <!-- Barra de búsqueda decorativa -->
+      <div class="search-bar">
+        <input type="text" placeholder="Buscar..." aria-label="Buscar en el sitio" />
+        <i class="fas fa-magnifying-glass search-bar-icon" aria-hidden="true"></i>
+      </div>
+
+      <!-- Botón hamburguesa (mobile) -->
+      <button
+        class="hamburger"
+        aria-label="Abrir menú de navegación"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        type="button"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <!-- Menú mobile -->
+    <nav id="mobile-nav" class="mobile-nav" aria-label="Navegación móvil">
+      <ul class="mobile-nav-list">
+        <li><a href="#inicio">Documentación</a></li>
+        <li><a href="#servicios">Guías</a></li>
+        <li><a href="#nosotros">Referencia</a></li>
+        <li><a href="#contacto">Acerca de</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== SECCIÓN: HERO ===== -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <!-- Elemento decorativo ASCII art -->
+      <div class="hero-ascii" aria-hidden="true">
+    ┌──────────────┐
+    │  const app   │
+    │  = new Grid  │
+    │    .init()   │
+    ├──────────────┤
+    │  ◉ deploy    │
+    │  ◉ build     │
+    │  ◉ test      │
+    └──────────────┘
+       ╔══════╗
+       ║ &lt;/&gt; ║
+       ╚══════╝
+      </div>
+
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-eyebrow" aria-hidden="true"></span>
+
+          <h1 id="hero-title">Resources for Developers, by Developers</h1>
+
+          <p class="hero-subtitle">
+            <span class="highlight">Documenting</span> prompt engineering, agent comparison, and web generation, since 2026.
+          </p>
+
+          <a href="#contacto" class="btn-primary">Comenzar ahora</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECCIÓN: HERO AD (PROMOCIONAL) ===== -->
+    <section class="hero-ad" aria-labelledby="hero-ad-title">
+      <span class="hero-ad-badge" aria-label="Proyecto PFO2">PFO2</span>
+
+      <div class="container">
+        <div class="hero-ad-grid">
+          <!-- Columna de texto -->
+          <div class="hero-ad-text">
+            <h2 id="hero-ad-title">AI made building easy, DarkGrid makes it safe</h2>
+            <p>
+              Combinamos inteligencia artificial con criterio humano para entregar
+              productos digitales que funcionan, escalan y generan resultados reales.
+            </p>
+            <a href="#servicios" class="btn-outline">Conocé más</a>
+          </div>
+
+          <!-- Columna de formas glass -->
+          <div class="glass-shapes" aria-hidden="true">
+            <div class="glass-rect-lg"></div>
+            <div class="glass-rect-sm"></div>
+            <div class="glass-circle"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECCIÓN: SOBRE NOSOTROS ===== -->
+    <section class="about" id="nosotros" aria-labelledby="about-title">
+      <div class="container">
+        <h2 id="about-title" class="section-label">Quiénes somos</h2>
+        <span class="section-line" aria-hidden="true"></span>
+
+        <div class="about-grid">
+          <!-- Columna de texto -->
+          <div class="about-content">
+            <h3>Diseño centrado en el usuario</h3>
+            <p>
+              Cada decisión parte de entender a las personas. Investigamos, escuchamos y
+              prototipamos para crear productos digitales que realmente resuelven problemas
+              y generan conexiones auténticas con las audiencias de nuestros clientes.
+            </p>
+
+            <h3>Pasión por el código limpio</h3>
+            <p>
+              Escribimos para mantener, escalar y mejorar. Nuestro código no solo funciona
+              hoy: está pensado para crecer con tu negocio, con estándares de calidad que
+              facilitan cada iteración futura sin deuda técnica innecesaria.
+            </p>
+
+            <h3>Innovación constante</h3>
+            <p>
+              Adoptamos nuevas tecnologías sin perder el foco en los resultados. No perseguimos
+              tendencias por moda: seleccionamos herramientas que aportan valor real y
+              potencian la experiencia del usuario final en cada proyecto.
+            </p>
+          </div>
+
+          <!-- Columna de imagen -->
+          <div class="about-image">
+            <img
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80"
+              alt="Equipo de trabajo DarkGrid colaborando en un proyecto"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECCIÓN: SERVICIOS ===== -->
+    <section class="services" id="servicios" aria-labelledby="services-title">
+      <div class="container">
+        <h2 id="services-title" class="section-label">Lo que hacemos</h2>
+        <span class="section-line" aria-hidden="true"></span>
+
+        <div class="services-grid">
+          <!-- Tarjeta A — Diseño UI/UX -->
+          <article class="service-card">
+            <div class="service-card-img">
+              <img
+                src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=600&q=80"
+                alt="Diseño de interfaz de usuario en un dispositivo móvil"
+                loading="lazy"
+              />
+            </div>
+            <div class="service-card-body">
+              <div class="service-icon-fa" aria-hidden="true">
+                <i class="fas fa-pen-ruler"></i>
+              </div>
+              <h3>Diseño UI/UX</h3>
+              <p>
+                Creamos interfaces intuitivas y visualmente atractivas que enamoran
+                a los usuarios desde el primer clic.
+              </p>
+            </div>
+          </article>
+
+          <!-- Tarjeta B — Desarrollo Web -->
+          <article class="service-card">
+            <div class="service-card-img">
+              <img
+                src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80"
+                alt="Código de desarrollo web en un monitor"
+                loading="lazy"
+              />
+            </div>
+            <div class="service-card-body">
+              <div class="service-icon-fa" aria-hidden="true">
+                <i class="fas fa-display"></i>
+              </div>
+              <h3>Desarrollo Web</h3>
+              <p>
+                Desarrollamos sitios y aplicaciones rápidas, escalables y con código
+                limpio que resiste el paso del tiempo.
+              </p>
+            </div>
+          </article>
+
+          <!-- Tarjeta C — E-commerce -->
+          <article class="service-card">
+            <div class="service-card-img">
+              <img
+                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80"
+                alt="Persona realizando una compra en línea con tarjeta de crédito"
+                loading="lazy"
+              />
+            </div>
+            <div class="service-card-body">
+              <div class="service-icon-fa" aria-hidden="true">
+                <i class="fas fa-bag-shopping"></i>
+              </div>
+              <h3>E-commerce</h3>
+              <p>
+                Construimos tiendas online optimizadas para convertir visitantes en
+                compradores con experiencias de compra fluidas.
+              </p>
+            </div>
+          </article>
+
+          <!-- Tarjeta D — Optimización SEO -->
+          <article class="service-card">
+            <div class="service-card-img">
+              <img
+                src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=600&q=80"
+                alt="Pantallas con gráficos de análisis y datos de rendimiento"
+                loading="lazy"
+              />
+            </div>
+            <div class="service-card-body">
+              <div class="service-icon-fa" aria-hidden="true">
+                <i class="fas fa-chart-column"></i>
+              </div>
+              <h3>Optimización SEO</h3>
+              <p>
+                Posicionamos tu marca en los primeros resultados de búsqueda con
+                estrategias técnicas y de contenido efectivas.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECCIÓN: TESTIMONIOS ===== -->
+    <section class="testimonials" id="testimonios" aria-labelledby="testimonials-title">
+      <div class="container">
+        <h2 id="testimonials-title" class="section-label">Lo que dicen nuestros clientes</h2>
+        <span class="section-line" aria-hidden="true"></span>
+
+        <div class="testimonials-grid">
+          <!-- Testimonio 1 -->
+          <article class="testimonial-card">
+            <p class="testimonial-text">
+              DarkGrid transformó nuestra presencia online. El diseño superó todas
+              nuestras expectativas y los resultados en ventas lo confirman.
+            </p>
+            <div class="testimonial-author">
+              <img
+                class="testimonial-avatar"
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80"
+                alt="Foto de perfil de Mariana Castillo"
+                loading="lazy"
+              />
+              <div>
+                <div class="testimonial-name">Mariana Castillo</div>
+                <div class="testimonial-role">CEO, Tienda Lumina</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Testimonio 2 -->
+          <article class="testimonial-card">
+            <p class="testimonial-text">
+              Profesionalismo total desde el primer día. Entendieron nuestra marca
+              mejor que nosotros mismos y lo tradujeron en un sitio increíble.
+            </p>
+            <div class="testimonial-author">
+              <img
+                class="testimonial-avatar"
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80"
+                alt="Foto de perfil de Roberto Lagos"
+                loading="lazy"
+              />
+              <div>
+                <div class="testimonial-name">Roberto Lagos</div>
+                <div class="testimonial-role">Director de Marketing, NovaTech</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Testimonio 3 -->
+          <article class="testimonial-card">
+            <p class="testimonial-text">
+              Rápidos, creativos y muy comunicativos. El mejor equipo con el que
+              trabajé. Ya estamos planeando la segunda fase del proyecto.
+            </p>
+            <div class="testimonial-author">
+              <img
+                class="testimonial-avatar"
+                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=80&q=80"
+                alt="Foto de perfil de Sofía Paredes"
+                loading="lazy"
+              />
+              <div>
+                <div class="testimonial-name">Sofía Paredes</div>
+                <div class="testimonial-role">Fundadora, Estudio Bruma</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECCIÓN: CONTACTO ===== -->
+    <section class="contact" id="contacto" aria-labelledby="contact-title">
+      <div class="container">
+        <h2 id="contact-title" class="section-label">Trabajemos juntos</h2>
+        <span class="section-line" aria-hidden="true"></span>
+
+        <form class="contact-form" action="#" method="post" novalidate>
+          <div class="form-group">
+            <label for="contact-name">Nombre</label>
+            <input
+              type="text"
+              id="contact-name"
+              name="name"
+              placeholder="Tu nombre"
+              autocomplete="name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="contact-email">Email</label>
+            <input
+              type="email"
+              id="contact-email"
+              name="email"
+              placeholder="tu@email.com"
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="contact-message">Mensaje</label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="5"
+              placeholder="Contanos sobre tu proyecto..."
+            ></textarea>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn-primary">Enviar mensaje</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SECCIÓN: FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Columna 1: Marca -->
+        <div>
+          <div class="footer-brand-name">
+            <i class="fas fa-code logo-icon-footer" aria-hidden="true"></i>DarkGrid
+          </div>
+          <p class="footer-desc">
+            Estudio creativo de diseño y desarrollo web. Construimos presencia digital
+            seria, confiable y memorable para marcas que buscan resultados.
+          </p>
+        </div>
+
+        <!-- Columna 2: Enlaces internos -->
+        <div class="footer-col">
+          <h4>Proyectos</h4>
+          <ul class="footer-links">
+            <li><a href="./prompt.html">Prompt</a></li>
+            <li><a href="./antigravity/index.html">Agente 1</a></li>
+            <li><a href="./codex/index.html">Agente 2</a></li>
+          </ul>
+        </div>
+
+        <!-- Columna 3: Redes y social -->
+        <div class="footer-col">
+          <h4>Conectá</h4>
+          <ul class="footer-socials" aria-label="Redes sociales">
+            <li>
+              <a href="#" aria-label="GitHub">
+                <i class="fa-brands fa-github" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+          <a href="#" class="footer-vercel" aria-label="Vercel">
+            <i class="fas fa-triangle-exclamation" aria-hidden="true"></i>
+            Vercel
+          </a>
+        </div>
+      </div>
+
+      <p class="footer-copy">© 2026 DarkGrid · Proyecto académico PFO2</p>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT: MENÚ HAMBURGUESA ===== -->
+  <script>
+    (function () {
+      'use strict';
+
+      var hamburger = document.querySelector('.hamburger');
+      var mobileNav = document.getElementById('mobile-nav');
+      var mobileLinks = mobileNav.querySelectorAll('a');
+
+      function toggleMenu() {
+        var isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+        hamburger.setAttribute('aria-expanded', String(!isOpen));
+        mobileNav.classList.toggle('is-open', !isOpen);
+        hamburger.setAttribute(
+          'aria-label',
+          !isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'
+        );
+      }
+
+      hamburger.addEventListener('click', toggleMenu);
+
+      hamburger.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleMenu();
+        }
+      });
+
+      mobileLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          hamburger.setAttribute('aria-expanded', 'false');
+          mobileNav.classList.remove('is-open');
+          hamburger.setAttribute('aria-label', 'Abrir menú de navegación');
+        });
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) {
+          hamburger.setAttribute('aria-expanded', 'false');
+          mobileNav.classList.remove('is-open');
+          hamburger.setAttribute('aria-label', 'Abrir menú de navegación');
+        }
+      });
+    })();
+  </script>
+
+  <!-- Botón fijo: Volver al inicio -->
+  <a href="./index.html"
+     id="btn-volver-inicio"
+     style="
+       position: fixed;
+       bottom: 2rem;
+       right: 2rem;
+       z-index: 9999;
+       background-color: #0099ff;
+       color: #ffffff;
+       font-weight: 600;
+       font-size: 0.9rem;
+       padding: 0.6rem 1.2rem;
+       border-radius: 6px;
+       text-decoration: none;
+       display: inline-flex;
+       align-items: center;
+       gap: 0.5rem;
+       transition: background-color 0.2s ease, box-shadow 0.2s ease;
+       font-family: inherit;
+     "
+     onmouseenter="this.style.backgroundColor='rgba(0,153,255,0.85)';this.style.boxShadow='0 4px 16px rgba(0,153,255,0.30)';"
+     onmouseleave="this.style.backgroundColor='#0099ff';this.style.boxShadow='none';"
+  >
+    <i class="fa-solid fa-arrow-left"></i> Volver al inicio
+  </a>
+
+</body>
+</html>

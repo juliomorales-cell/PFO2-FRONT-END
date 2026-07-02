@@ -1,0 +1,967 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Landing page de DarkGrid creada por Codex para la PFO2.">
+  <title>DarkGrid Studio - Codex</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* =========================================================
+       Base visual, variables y reset
+    ========================================================= */
+    :root {
+      --bg: #18181b;
+      --section-a: #1a1a1e;
+      --section-b: #1f1f23;
+      --section-c: #16161a;
+      --banner: #6b1b6b;
+      --text: #f0f0f0;
+      --white: #ffffff;
+      --muted: #c0c0c0;
+      --soft: #a0a0a0;
+      --dim: #6b6b6b;
+      --blue: #0099ff;
+      --purple: #8a2e8a;
+      --border: #2e2e32;
+      --border-strong: #3e3e44;
+      --gradient: linear-gradient(to right, #18181b 0%, #8a2e8a 100%);
+      --glass: rgba(255,255,255,0.08);
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--container));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 86px 0;
+    }
+
+    .section-header {
+      max-width: 760px;
+      margin-bottom: 36px;
+    }
+
+    .section-header.center {
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: var(--white);
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6.4rem);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+    }
+
+    h3 {
+      font-size: 1.25rem;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid var(--blue);
+      border-radius: 8px;
+      background: var(--blue);
+      color: var(--white);
+      font-weight: 800;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(0,153,255,0.18);
+      outline: none;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--white);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .logo i {
+      color: var(--blue);
+    }
+    .back-dashboard {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 50;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 8px;
+      background: rgba(31,31,35,0.9);
+      color: var(--white);
+      font-weight: 800;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.28);
+      backdrop-filter: blur(16px);
+      transition: transform 180ms ease, border-color 180ms ease, color 180ms ease;
+    }
+
+    .back-dashboard:hover,
+    .back-dashboard:focus-visible {
+      color: var(--blue);
+      border-color: var(--blue);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    /* =========================================================
+       1. Top banner
+    ========================================================= */
+    .top-banner {
+      background: var(--banner);
+      color: var(--white);
+      font-size: 0.92rem;
+    }
+
+    .top-banner__inner {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .top-banner__content {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .top-banner__brand,
+    .top-banner__tag {
+      font-weight: 800;
+    }
+
+    .top-banner .btn-small {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 12px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 8px;
+      color: var(--white);
+      font-size: 0.84rem;
+      font-weight: 800;
+      transition: background-color 180ms ease, transform 180ms ease;
+    }
+
+    .top-banner .btn-small:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-1px);
+    }
+
+    /* =========================================================
+       2. Header fijo
+    ========================================================= */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(24,24,27,0.94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+    }
+
+    .site-header__inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--soft);
+      font-size: 0.95rem;
+    }
+
+    .nav a {
+      position: relative;
+      padding: 8px 0;
+      transition: color 180ms ease;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 2px;
+      width: 0;
+      height: 2px;
+      background: var(--blue);
+      transition: width 180ms ease;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--white);
+      outline: none;
+    }
+
+    .nav a:hover::after,
+    .nav a:focus-visible::after {
+      width: 100%;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 210px;
+      height: 40px;
+      padding: 0 13px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--section-b);
+      color: var(--dim);
+      font-size: 0.9rem;
+    }
+
+    /* =========================================================
+       3. Hero
+    ========================================================= */
+    .hero {
+      min-height: 600px;
+      display: grid;
+      align-items: center;
+      overflow: hidden;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero__inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 40px;
+      align-items: center;
+      padding: 92px 0;
+    }
+
+    .hero__subtitle {
+      max-width: 720px;
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 2.3vw, 1.36rem);
+    }
+
+    .hero__subtitle strong {
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    .code-rings {
+      color: var(--border);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92rem;
+      line-height: 1.25;
+      white-space: pre;
+      transform: rotate(12deg);
+      opacity: 0.88;
+      user-select: none;
+    }
+
+    /* =========================================================
+       4. Promoción
+    ========================================================= */
+    .hero-ad {
+      background: var(--gradient);
+      border-block: 1px solid var(--border);
+    }
+
+    .hero-ad__inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 34px;
+      align-items: center;
+      min-height: 360px;
+      padding: 56px;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .hero-ad__tag {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      color: var(--white);
+      font-weight: 900;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-ad p {
+      max-width: 620px;
+      margin-top: 16px;
+    }
+
+    .glass-art {
+      position: relative;
+      min-height: 250px;
+    }
+
+    .glass-shape {
+      position: absolute;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.18);
+    }
+
+    .glass-shape.one {
+      width: 210px;
+      height: 140px;
+      right: 92px;
+      top: 22px;
+      border-radius: 8px;
+      transform: rotate(-8deg);
+    }
+
+    .glass-shape.two {
+      width: 160px;
+      height: 96px;
+      right: 26px;
+      bottom: 30px;
+      border-radius: 8px;
+      transform: rotate(8deg);
+    }
+
+    .glass-shape.three {
+      width: 110px;
+      height: 110px;
+      right: 240px;
+      bottom: 18px;
+      border-radius: 999px;
+    }
+
+    /* =========================================================
+       5. Sobre nosotros
+    ========================================================= */
+    .about {
+      background: var(--section-a);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 46px;
+      align-items: start;
+    }
+
+    .about-copy {
+      display: grid;
+      gap: 18px;
+    }
+
+    /* =========================================================
+       6. Servicios
+    ========================================================= */
+    .services {
+      background: var(--bg);
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .service-card,
+    .testimonial-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--section-b);
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .service-card {
+      min-height: 250px;
+      padding: 26px;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--blue);
+      box-shadow: 0 18px 42px rgba(0,153,255,0.12);
+    }
+
+    .service-card i {
+      margin-bottom: 20px;
+      color: var(--blue);
+      font-size: 1.7rem;
+    }
+
+    .service-card p {
+      margin-top: 12px;
+      color: var(--soft);
+    }
+
+    /* =========================================================
+       7. Testimonios
+    ========================================================= */
+    .testimonials {
+      background: var(--section-a);
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .testimonial-card {
+      padding: 26px;
+    }
+
+    .person {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--border-strong);
+      color: var(--white);
+      font-weight: 900;
+    }
+
+    .person strong {
+      display: block;
+      color: var(--white);
+    }
+
+    .person span {
+      color: var(--soft);
+      font-size: 0.9rem;
+    }
+
+    /* =========================================================
+       8. Contacto
+    ========================================================= */
+    .contact {
+      background: var(--bg);
+    }
+
+    .contact-card {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--section-b);
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      color: var(--soft);
+      font-weight: 700;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      background: var(--section-c);
+      color: var(--text);
+      padding: 13px 14px;
+      outline: none;
+      transition: border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0,153,255,0.14);
+    }
+
+    /* =========================================================
+       9. Footer
+    ========================================================= */
+    .footer {
+      background: var(--section-c);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 30px;
+      padding: 52px 0 38px;
+    }
+
+    .footer-title {
+      margin-bottom: 14px;
+      color: var(--white);
+      font-size: 0.95rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .footer a {
+      color: var(--soft);
+      transition: color 180ms ease;
+    }
+
+    .footer a:hover {
+      color: var(--blue);
+    }
+
+    .footer-links,
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-links {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .socials a {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      font-size: 1.1rem;
+    }
+
+    .copyright {
+      padding: 20px 0 24px;
+      border-top: 1px solid var(--border);
+      color: var(--dim);
+      text-align: center;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero__inner,
+      .hero-ad__inner,
+      .about-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-grid,
+      .testimonial-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .code-rings,
+      .nav {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 24px, var(--container));
+      }
+
+      .top-banner__inner,
+      .top-banner__content {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .top-banner__inner {
+        padding: 10px 0;
+        gap: 6px;
+      }
+
+      .site-header__inner {
+        min-height: 68px;
+      }
+
+      .search-box {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero__inner {
+        padding: 78px 0;
+      }
+
+      .hero-ad__inner,
+      .contact-card {
+        padding: 26px;
+      }
+
+      .glass-art {
+        min-height: 190px;
+      }
+
+      .glass-shape.one {
+        right: 42px;
+      }
+
+      .glass-shape.two {
+        right: 0;
+      }
+
+      .glass-shape.three {
+        right: 180px;
+      }
+
+      .service-grid,
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-dashboard" href="index.html">
+    <i class="fa-solid fa-table-columns" aria-hidden="true"></i>
+    <span>Volver al Comparador</span>
+  </a>
+  <!-- =========================================================
+       1. TOP BANNER
+  ========================================================== -->
+  <div class="top-banner">
+    <div class="container top-banner__inner">
+      <div class="top-banner__content">
+        <span class="top-banner__brand">DarkGrid</span>
+        <span>Recursos profesionales para diseñar, construir y escalar experiencias web.</span>
+        <a class="btn-small" href="#servicios">Explorar recursos</a>
+      </div>
+      <span class="top-banner__tag">PFO2</span>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       2. HEADER FIJO
+  ========================================================== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="logo" href="#inicio" aria-label="Ir al inicio">
+        <i class="fa-solid fa-code" aria-hidden="true"></i>
+        <span>DarkGrid</span>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#documentacion">Documentación</a>
+        <a href="#servicios">Guías</a>
+        <a href="#contacto">Referencia</a>
+        <a href="#nosotros">Acerca de</a>
+      </nav>
+      <div class="search-box" aria-label="Búsqueda decorativa">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <span>Buscar recursos</span>
+      </div>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <!-- =======================================================
+         3. HERO SECTION
+    ======================================================== -->
+    <section class="hero" id="documentacion" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+        <div>
+          <h1 id="hero-title">Recursos para desarrolladores, por desarrolladores</h1>
+          <p class="hero__subtitle"><strong>Documentamos</strong> ingeniería de prompts, comparación de agentes y generación web profesional desde 2026.</p>
+        </div>
+        <pre class="code-rings" aria-hidden="true">
+      { grid }
+   [ prompt ]  [ agent ]
+ &lt;code&gt;       &lt;safe&gt;
+( build )   ( refine )
+ &lt;ship&gt;       &lt;/web&gt;
+   [ ui ]     [ ux ]
+      { dark }
+        </pre>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         4. SECCIÓN PROMOCIONAL
+    ======================================================== -->
+    <section class="hero-ad" aria-labelledby="promo-title">
+      <div class="container">
+        <div class="hero-ad__inner">
+          <span class="hero-ad__tag">PFO2</span>
+          <div>
+            <h2 id="promo-title">La IA facilitó construir, DarkGrid lo vuelve seguro</h2>
+            <p>Convertimos ideas digitales en productos sólidos, con dirección visual precisa, arquitectura clara y criterios de calidad pensados para proyectos reales.</p>
+          </div>
+          <div class="glass-art" aria-hidden="true">
+            <span class="glass-shape one"></span>
+            <span class="glass-shape two"></span>
+            <span class="glass-shape three"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         5. SOBRE NOSOTROS
+    ======================================================== -->
+    <section class="section about" id="nosotros" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div class="section-header">
+          <h2 id="about-title">Quiénes somos</h2>
+        </div>
+        <div class="about-copy">
+          <p>DarkGrid es un estudio de diseño y desarrollo web enfocado en experiencias digitales serias, rápidas y medibles. Trabajamos con una mirada integral: identidad visual, interfaz, rendimiento y claridad de implementación.</p>
+          <p>Nuestro proceso prioriza código limpio, diseño consistente y decisiones orientadas a resultados. Cada pantalla se construye para comunicar mejor, cargar rápido y sostener una experiencia de usuario confiable.</p>
+          <p>Combinamos criterio técnico con sensibilidad visual para acompañar marcas, proyectos académicos y productos digitales que necesitan una presencia profesional desde el primer contacto.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         6. SERVICIOS
+    ======================================================== -->
+    <section class="section services" id="servicios" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section-header center">
+          <h2 id="services-title">Servicios</h2>
+        </div>
+        <div class="service-grid">
+          <article class="service-card">
+            <i class="fa-solid fa-pen-ruler" aria-hidden="true"></i>
+            <h3>Diseño UI/UX</h3>
+            <p>Interfaces modernas, jerarquías claras y flujos pensados para usuarios reales.</p>
+          </article>
+          <article class="service-card">
+            <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
+            <h3>Desarrollo Web</h3>
+            <p>Sitios responsivos, performantes y mantenibles con tecnologías web modernas.</p>
+          </article>
+          <article class="service-card">
+            <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i>
+            <h3>E-commerce</h3>
+            <p>Experiencias de compra ordenadas, confiables y preparadas para convertir.</p>
+          </article>
+          <article class="service-card">
+            <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+            <h3>Optimización SEO</h3>
+            <p>Estructura, contenido y rendimiento ajustados para mejorar visibilidad orgánica.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         7. TESTIMONIOS
+    ======================================================== -->
+    <section class="section testimonials" aria-labelledby="testimonials-title">
+      <div class="container">
+        <div class="section-header center">
+          <h2 id="testimonials-title">Testimonios</h2>
+        </div>
+        <div class="testimonial-grid">
+          <article class="testimonial-card">
+            <div class="person">
+              <span class="avatar">MR</span>
+              <div>
+                <strong>Marina Ríos</strong>
+                <span>Directora de producto</span>
+              </div>
+            </div>
+            <p>DarkGrid ordenó nuestra presencia digital con una propuesta elegante, clara y muy fácil de mantener.</p>
+          </article>
+          <article class="testimonial-card">
+            <div class="person">
+              <span class="avatar">LC</span>
+              <div>
+                <strong>Lucas Campos</strong>
+                <span>Fundador de startup</span>
+              </div>
+            </div>
+            <p>El resultado fue sólido desde lo visual y también desde el código. Se nota el criterio profesional.</p>
+          </article>
+          <article class="testimonial-card">
+            <div class="person">
+              <span class="avatar">AP</span>
+              <div>
+                <strong>Ana Pereyra</strong>
+                <span>Responsable comercial</span>
+              </div>
+            </div>
+            <p>Logramos una landing sobria, veloz y enfocada en conversiones sin perder identidad.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================
+         8. FORMULARIO DE CONTACTO
+    ======================================================== -->
+    <section class="section contact" id="contacto" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-header center">
+          <h2 id="contact-title">Contacto</h2>
+        </div>
+        <form class="contact-card" action="#" method="post">
+          <div class="form-grid">
+            <label>
+              Nombre
+              <input type="text" name="nombre" placeholder="Tu nombre">
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="tu@email.com">
+            </label>
+            <label>
+              Mensaje
+              <textarea name="mensaje" placeholder="Contanos sobre tu proyecto"></textarea>
+            </label>
+            <button class="btn" type="submit">
+              <span>Enviar</span>
+              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================
+       9. FOOTER
+  ========================================================== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="logo" href="#inicio">
+          <i class="fa-solid fa-code" aria-hidden="true"></i>
+          <span>DarkGrid</span>
+        </a>
+        <p>Estudio de diseño y desarrollo web</p>
+      </div>
+      <div>
+        <h2 class="footer-title">Enlaces</h2>
+        <div class="footer-links">
+          <a href="#">Prompt</a>
+          <a href="antigravity.html">Agente 1</a>
+          <a href="codex.html">Agente 2</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="footer-title">Repositorio</h2>
+        <div class="footer-links">
+          <a href="#">GitHub</a>
+          <a href="#">Vercel</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="footer-title">Redes</h2>
+        <div class="socials">
+          <a href="#" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">© 2026 DarkGrid · Proyecto académico PFO2</div>
+  </footer>
+
+  <script>
+    /* =========================================================
+       JS interno: evita envío real del formulario de maqueta
+    ========================================================= */
+    const form = document.querySelector(".contact-card");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const button = form.querySelector("button");
+      const originalText = button.innerHTML;
+      button.innerHTML = '<span>Mensaje preparado</span><i class="fa-solid fa-check" aria-hidden="true"></i>';
+      window.setTimeout(() => {
+        button.innerHTML = originalText;
+      }, 1800);
+    });
+  </script>
+</body>
+</html>
+
+
+
+

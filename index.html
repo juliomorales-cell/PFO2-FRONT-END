@@ -1,0 +1,559 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portada del proyecto PFO2 DarkGrid Studio.">
+  <title>DarkGrid Studio | PFO2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* ===== SECTION: RESET AND TOKENS ===== */
+    :root {
+      --bg: #18181b;
+      --section-a: #1a1a1e;
+      --section-b: #1f1f23;
+      --section-c: #16161a;
+      --banner: #6b1b6b;
+      --text: #f0f0f0;
+      --white: #ffffff;
+      --muted: #c0c0c0;
+      --soft: #a0a0a0;
+      --dim: #6b6b6b;
+      --blue: #0099ff;
+      --purple: #8a2e8a;
+      --border: #2e2e32;
+      --border-strong: #3e3e44;
+      --gradient: linear-gradient(to right, #18181b 0%, #8a2e8a 100%);
+      --glass: rgba(255,255,255,0.08);
+      --container: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(100% - 32px, var(--container)); margin: 0 auto; }
+    .section { padding: 78px 0; }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--white);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .logo i { color: var(--blue); }
+
+    .section-title { margin-bottom: 34px; text-align: center; }
+    .section-title h2 { color: var(--white); font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; font-weight: 900; }
+    .section-title p { margin-top: 10px; color: var(--soft); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid var(--blue);
+      border-radius: 8px;
+      background: var(--blue);
+      color: var(--white);
+      font-weight: 800;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,153,255,0.16); outline: none; }
+
+    /* ===== SECTION: TOP BANNER ===== */
+    .top-banner { background: var(--banner); color: var(--white); }
+    .top-banner__inner { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 0.92rem; }
+    .top-banner strong { font-weight: 900; letter-spacing: 0.05em; }
+
+    /* ===== SECTION: HEADER ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(24,24,27,0.94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+    }
+
+    .header__inner { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .header__label { color: var(--soft); font-size: 0.95rem; white-space: nowrap; }
+
+    /* ===== SECTION: HERO ===== */
+    .hero { position: relative; overflow: hidden; background: var(--gradient); border-bottom: 1px solid var(--border); }
+    .hero__inner { min-height: 440px; display: grid; place-items: center; padding: 72px 0; text-align: center; }
+    .hero h1 { color: var(--white); font-size: clamp(3.2rem, 9vw, 6.5rem); line-height: 0.98; font-weight: 900; letter-spacing: 0; }
+    .hero p { max-width: 720px; margin: 18px auto 0; color: var(--muted); font-size: clamp(1.05rem, 2.4vw, 1.3rem); }
+
+    .glass-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 26px;
+      padding: 10px 16px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 8px;
+      background: var(--glass);
+      color: var(--white);
+      font-size: 0.9rem;
+      font-weight: 800;
+      backdrop-filter: blur(12px);
+    }
+
+    /* ===== SECTION: STUDENT INFO ===== */
+    .project-info { background: var(--section-b); border-bottom: 1px solid var(--border); }
+    .info-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+
+    .info-item {
+      display: grid;
+      grid-template-columns: minmax(130px, 0.42fr) 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: rgba(24,24,27,0.36);
+    }
+
+    .info-label { color: var(--soft); }
+    .info-value { color: var(--text); font-weight: 800; }
+
+    /* ===== SECTION: ACCESS CARDS ===== */
+    .access { background: var(--bg); }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      transform-origin: center;
+      transition: opacity 300ms ease, transform 300ms ease;
+    }
+
+    .cards.is-hidden {
+      opacity: 0;
+      transform: scale(0.96);
+      pointer-events: none;
+    }
+
+    .card {
+      min-height: 370px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--section-b);
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .card:hover,
+    .card:focus-within { transform: translateY(-4px); }
+    .card--blue:hover,
+    .card--blue:focus-within { border-color: var(--blue); box-shadow: 0 18px 44px rgba(0,153,255,0.15); }
+    .card--purple:hover,
+    .card--purple:focus-within { border-color: var(--purple); box-shadow: 0 18px 44px rgba(138,46,138,0.2); }
+
+    .card__icon {
+      width: 56px;
+      height: 56px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      font-size: 1.55rem;
+    }
+
+    .icon-blue { color: var(--blue); }
+    .icon-purple { color: var(--purple); }
+    .card h3 { color: var(--white); font-size: 1.35rem; line-height: 1.25; font-weight: 900; }
+    .card p { margin-top: 16px; color: var(--soft); }
+    .card .btn { margin-top: auto; }
+    button.btn {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .model-badge {
+      display: inline-flex;
+      margin-top: 12px;
+      padding: 7px 10px;
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 800;
+    }
+
+    .card--purple .btn { background: var(--purple); border-color: var(--purple); }
+    .card--purple .btn:hover,
+    .card--purple .btn:focus-visible { box-shadow: 0 14px 34px rgba(138,46,138,0.2); }
+    /* ===== SECTION: PROMPT OVERLAY ===== */
+    .prompt-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      background: rgba(8, 8, 12, 0.78);
+      backdrop-filter: blur(16px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 300ms ease;
+    }
+
+    .prompt-overlay.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .prompt-overlay__panel {
+      width: min(100%, 980px);
+      max-height: min(86vh, 820px);
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(201,169,110,0.44);
+      border-radius: 8px;
+      background: rgba(17,24,39,0.96);
+      box-shadow: 0 26px 80px rgba(0,0,0,0.42);
+      overflow: hidden;
+      transform: scale(0.98);
+      transition: transform 300ms ease;
+    }
+
+    .prompt-overlay.is-visible .prompt-overlay__panel { transform: scale(1); }
+
+    .prompt-overlay__content {
+      overflow-y: auto;
+      padding: 34px;
+      color: var(--text);
+    }
+
+    .prompt-overlay__content h2 {
+      color: var(--white);
+      font-size: clamp(1.65rem, 4vw, 2.5rem);
+      line-height: 1.08;
+      font-weight: 900;
+    }
+
+    .prompt-overlay__content h3 {
+      margin-top: 28px;
+      color: #C9A96E;
+      font-size: 1.05rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .prompt-overlay__content p,
+    .prompt-overlay__content li {
+      color: var(--muted);
+    }
+
+    .prompt-overlay__content ul,
+    .prompt-overlay__content ol {
+      margin: 12px 0 0 22px;
+    }
+
+    .prompt-overlay__rule {
+      margin: 18px 0;
+      border: 0;
+      border-top: 1px solid var(--border-strong);
+    }
+
+    .prompt-overlay__footer {
+      padding: 18px 24px;
+      border-top: 1px solid var(--border);
+      background: rgba(13,13,13,0.42);
+      text-align: center;
+    }
+
+    .prompt-overlay__back {
+      min-height: 46px;
+      padding: 0 22px;
+      border: 1px solid #C9A96E;
+      border-radius: 8px;
+      background: transparent;
+      color: #C9A96E;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      transition: background 300ms ease, color 300ms ease, transform 300ms ease, box-shadow 300ms ease;
+    }
+
+    .prompt-overlay__back:hover,
+    .prompt-overlay__back:focus-visible {
+      background: #C9A96E;
+      color: #0B0F19;
+      transform: translateY(-2px);
+      box-shadow: 0 16px 34px rgba(201,169,110,0.18);
+      outline: none;
+    }
+
+    /* ===== SECTION: COMPARISON TABLE ===== */
+    .comparison { background: var(--section-a); }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; background: var(--section-b); }
+    table { width: 100%; min-width: 720px; border-collapse: collapse; }
+    th, td { padding: 18px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: left; }
+    th:last-child, td:last-child { border-right: 0; }
+    tr:last-child th, tr:last-child td { border-bottom: 0; }
+    thead th { background: var(--gradient); color: var(--white); font-weight: 900; }
+    tbody th { width: 34%; background: rgba(24,24,27,0.44); color: var(--text); font-weight: 800; }
+    .placeholder { color: var(--dim); font-style: italic; }
+
+    /* ===== SECTION: FOOTER ===== */
+    .footer { background: var(--section-c); border-top: 1px solid var(--border); }
+    .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 30px; padding: 48px 0 34px; }
+    .footer-title { margin-bottom: 14px; color: var(--white); font-size: 0.95rem; font-weight: 900; text-transform: uppercase; }
+    .footer p, .footer a { color: var(--soft); }
+    .footer a { transition: color 180ms ease; }
+    .footer a:hover, .footer a:focus-visible { color: var(--blue); outline: none; }
+    .footer-links, .socials { display: flex; flex-wrap: wrap; gap: 12px; }
+    .footer-links { flex-direction: column; align-items: flex-start; }
+    .socials a { display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid var(--border); border-radius: 8px; background: rgba(255,255,255,0.04); font-size: 1.1rem; }
+    .copyright { padding: 18px 0 24px; border-top: 1px solid var(--border); color: var(--dim); text-align: center; font-size: 0.92rem; }
+
+    @media (max-width: 900px) {
+      .info-grid, .cards, .footer-grid { grid-template-columns: 1fr; }
+      .card { min-height: 320px; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 24px, var(--container)); }
+      .top-banner__inner, .header__inner { align-items: flex-start; flex-direction: column; padding: 10px 0; }
+      .header__inner { min-height: auto; }
+      .info-item { grid-template-columns: 1fr; gap: 4px; }
+      .section { padding: 58px 0; }
+      .prompt-overlay { padding: 16px; }
+      .prompt-overlay__content { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== SECTION: TOP BANNER ===== -->
+  <div class="top-banner">
+    <div class="container top-banner__inner">
+      <span>Práctica Formativa Obligatoria 2 · Prompt Engineering en Agentes de IA</span>
+      <strong>PFO2</strong>
+    </div>
+  </div>
+
+  <!-- ===== SECTION: FIXED HEADER ===== -->
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html" aria-label="Inicio DarkGrid"><i class="fa-solid fa-code" aria-hidden="true"></i><span>DarkGrid</span></a>
+      <span class="header__label">Portada del Proyecto</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== SECTION: HERO ===== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+        <div>
+          <h1 id="hero-title">DarkGrid Studio</h1>
+          <p>Estudio de diseño y desarrollo web — soluciones digitales premium</p>
+          <span class="glass-badge">PFO2 · Prompt Engineering · 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION: STUDENT INFO ===== -->
+    <section class="section project-info" aria-labelledby="project-title">
+      <div class="container">
+        <div class="section-title"><h2 id="project-title">Datos del Proyecto</h2></div>
+        <div class="info-grid">
+          <div class="info-item"><span class="info-label">Materia:</span><span class="info-value">Prompt Engineering en Agentes de IA</span></div>
+          <div class="info-item"><span class="info-label">Práctica:</span><span class="info-value">PFO2 — Entrega Final</span></div>
+          <div class="info-item"><span class="info-label">Fecha de entrega:</span><span class="info-value">26/06/2026</span></div>
+          <div class="info-item"><span class="info-label">Agente 1:</span><span class="info-value">Antigravity</span></div>
+          <div class="info-item"><span class="info-label">Agente 2:</span><span class="info-value">Codex (OpenAI — codex-1)</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SECTION: ACCESS CARDS ===== -->
+    <section class="section access" aria-labelledby="access-title">
+      <div class="container">
+        <div class="section-title">
+          <h2 id="access-title">Accesos del Proyecto</h2>
+          <p>Seleccioná una opción para revisar el material de la entrega.</p>
+        </div>
+        <div class="cards">
+          <article class="card card--blue">
+            <div class="card__icon icon-blue"><i class="fa-solid fa-file-code" aria-hidden="true"></i></div>
+            <h3>El Prompt</h3>
+            <p>Texto completo del prompt de alta precisión utilizado en ambos agentes de desarrollo.</p>
+            <button class="btn" id="btn-ver-prompt" type="button"><span>Ver Prompt</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+          </article>
+          <article class="card card--purple">
+            <div class="card__icon icon-purple"><i class="fa-solid fa-robot" aria-hidden="true"></i></div>
+            <h3>Agente 1 — Antigravity</h3>
+            <span class="model-badge">Modelo: Antigravity AI</span>
+            <p>Landing Page de DarkGrid generada de forma autónoma por Antigravity a partir del prompt inicial.</p>
+            <a class="btn" href="./antigravity.html"><span>Ver Landing Page</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+          <article class="card card--blue">
+            <div class="card__icon icon-blue"><i class="fa-solid fa-microchip" aria-hidden="true"></i></div>
+            <h3>Agente 2 — Codex (OpenAI)</h3>
+            <span class="model-badge">Modelo: codex-1</span>
+            <p>Landing Page de DarkGrid generada de forma autónoma por Codex (OpenAI) a partir del mismo prompt inicial.</p>
+            <a class="btn" href="./codex.html"><span>Ver Landing Page</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== SECTION: PROMPT OVERLAY ===== -->
+    <div class="prompt-overlay" id="prompt-overlay" role="dialog" aria-modal="true" aria-labelledby="prompt-overlay-title" aria-hidden="true">
+      <div class="prompt-overlay__panel">
+        <div class="prompt-overlay__content">
+          <hr class="prompt-overlay__rule">
+          <h2 id="prompt-overlay-title">PROMPT — DARKGRID LANDING PAGE</h2>
+          <p><strong>Versión:</strong> 2.0 | Estética Corporativa Premium</p>
+          <p>Elaborado siguiendo las guías oficiales de Anthropic y OpenAI</p>
+          <hr class="prompt-overlay__rule">
+
+          <h3>ROL Y CONTEXTO</h3>
+          <p>Actuá como un desarrollador frontend senior especializado en diseño web profesional y experiencias digitales de alto impacto corporativo. Tu tarea es construir, en una única respuesta y sin pasos intermedios, una Landing Page completa y funcional para "DarkGrid", un estudio de diseño y desarrollo web que ayuda a marcas a construir presencia digital seria, confiable y memorable.</p>
+
+          <h3>RESTRICCIONES TÉCNICAS (OBLIGATORIAS — NO NEGOCIABLES)</h3>
+          <ul>
+            <li>Entregá UN ÚNICO archivo HTML5 autocontenido.</li>
+            <li>Los estilos CSS deben estar en una etiqueta &lt;style&gt; interna (no en archivo externo).</li>
+            <li>JavaScript debe estar en una etiqueta &lt;script&gt; interna, solo vanilla JS (sin frameworks).</li>
+            <li>Podés usar Tailwind CSS vía CDN únicamente para la maquetación base.</li>
+            <li>Podés usar Font Awesome vía CDN para los íconos del footer.</li>
+            <li>NO se permiten otras librerías, frameworks ni dependencias externas.</li>
+            <li>Todo el contenido textual debe estar en español.</li>
+            <li>El archivo debe poder abrirse directamente en cualquier navegador sin configuración adicional.</li>
+            <li>El código debe incluir comentarios explicativos en cada sección principal.</li>
+          </ul>
+
+          <h3>ESTÈTICA Y SISTEMA DE DISEÑO VISUAL</h3>
+          <p>El diseño transmite elegancia, confianza y profesionalismo. La identidad visual de DarkGrid es la de una agencia premium: sobria, minimalista, con jerarquía clara y espacios en blanco generosos. Cada decisión estética debe reforzar credibilidad. Está TERMINANTEMENTE PROHIBIDO usar colores neón, brillos eléctricos, estéticas cyberpunk, videojuego o cualquier elemento visual que comprometa la seriedad del resultado.</p>
+          <p><strong>Paleta de colores:</strong></p>
+          <ul>
+            <li>Fondo primario oscuro: #0B0F19</li>
+            <li>Fondo secundario oscuro: #111827</li>
+            <li>Fondo claro: #F5F5F0</li>
+            <li>Blanco hueso: #F0EDE8</li>
+            <li>Gris claro: #A8A8A0</li>
+            <li>Gris medio: #6B6B63</li>
+            <li>Oscuro puro: #0D0D0D</li>
+            <li>Dorado suave (Acento): #C9A96E</li>
+          </ul>
+
+          <h3>ESTRUCTURA DE LA PÁGINA (EN ESTE ORDEN EXACTO)</h3>
+          <ol>
+            <li>HEADER FIJO: Logo textual "DarkGrid" con detalle dorado, menú horizontal (Inicio, Servicios, Nosotros, Testimonios, Contacto) y menú hamburguesa en mobile.</li>
+            <li>HERO SECTION (id="inicio"): Título "Diseñamos experiencias digitales que transforman marcas", subtítulo y botón CTA "Quiero mi web" en dorado suave.</li>
+            <li>SOBRE NOSOTROS (id="nosotros"): Título "Quiénes somos" y tres párrafos sobre la filosofía (UI/UX, código limpio, innovación).</li>
+            <li>SERVICIOS (id="servicios"): Título "Lo que hacemos" y 4 tarjetas en grilla (Diseño UI/UX, Desarrollo Web, E-commerce, Optimización SEO) con efectos hover sutiles.</li>
+            <li>TESTIMONIOS (id="testimonios"): Título "Lo que dicen nuestros clientes", fondo claro (#F5F5F0) para contraste y 3 tarjetas con avatares tipográficos y cargos corporativos.</li>
+            <li>FORMULARIO DE CONTACTO (id="contacto"): Título "Trabajemos juntos", campos (Nombre, Email, Mensaje) y botón "Enviar mensaje".</li>
+            <li>FOOTER: Copyright y enlaces simulados a redes sociales usando Font Awesome.</li>
+          </ol>
+
+          <h3>ACCESIBILIDAD Y CALIDAD</h3>
+          <p>Uso de HTML5 semántico, atributos aria-hidden, contraste WCAG AA mínimo y estados :focus-visible claros. El código entregado debe ser el producto final listo para producción.</p>
+        </div>
+        <div class="prompt-overlay__footer">
+          <button class="prompt-overlay__back" id="btn-volver-menu" type="button">Volver al Menú</button>
+        </div>
+      </div>
+    </div>
+    <!-- ===== SECTION: COMPARISON TABLE ===== -->
+    <section class="section comparison" aria-labelledby="comparison-title">
+      <div class="container">
+        <div class="section-title"><h2 id="comparison-title">Comparativa de Resultados</h2></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Criterio</th><th>Antigravity</th><th>Codex</th></tr></thead>
+            <tbody>
+              <tr><th>Fidelidad visual</th><td><span class="placeholder">[A completar]</span></td><td><span class="placeholder">[A completar]</span></td></tr>
+              <tr><th>Imágenes reales</th><td><span class="placeholder">[A completar]</span></td><td><span class="placeholder">[A completar]</span></td></tr>
+              <tr><th>Responsividad</th><td><span class="placeholder">[A completar]</span></td><td><span class="placeholder">[A completar]</span></td></tr>
+              <tr><th>Calidad de código</th><td><span class="placeholder">[A completar]</span></td><td><span class="placeholder">[A completar]</span></td></tr>
+              <tr><th>Secciones completadas</th><td><span class="placeholder">[A completar]</span></td><td><span class="placeholder">[A completar]</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SECTION: FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div><a class="logo" href="index.html"><i class="fa-solid fa-code" aria-hidden="true"></i><span>DarkGrid</span></a><p>Estudio de diseño y desarrollo web</p></div>
+      <nav aria-label="Enlaces del proyecto"><h2 class="footer-title">Enlaces</h2><div class="footer-links"><a href="index.html">Inicio</a><a href="antigravity.html">Antigravity</a><a href="codex.html">Codex</a></div></nav>
+      <div><h2 class="footer-title">Redes</h2><div class="socials"><a href="#" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a></div></div>
+    </div>
+    <div class="copyright">© 2026 DarkGrid · Proyecto académico PFO2</div>
+  </footer>
+
+  <script>
+    /* ===== SECTION: VANILLA JS ===== */
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          event.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    const promptButton = document.getElementById('btn-ver-prompt');
+    const promptOverlay = document.getElementById('prompt-overlay');
+    const backButton = document.getElementById('btn-volver-menu');
+    const cardsGrid = document.querySelector('.cards');
+
+    const openPromptOverlay = () => {
+      cardsGrid.classList.add('is-hidden');
+      promptOverlay.classList.add('is-visible');
+      promptOverlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      backButton.focus();
+    };
+
+    const closePromptOverlay = () => {
+      cardsGrid.classList.remove('is-hidden');
+      promptOverlay.classList.remove('is-visible');
+      promptOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      promptButton.focus();
+    };
+
+    promptButton.addEventListener('click', openPromptOverlay);
+    backButton.addEventListener('click', closePromptOverlay);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && promptOverlay.classList.contains('is-visible')) {
+        closePromptOverlay();
+      }
+    });  </script>
+</body>
+</html>
+
