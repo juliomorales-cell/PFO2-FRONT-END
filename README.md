@@ -19,7 +19,7 @@
 
 ## 🌐 Sitio en Vivo
 
-**[🔗 Visitar el sitio →](https://juliornales-cell.github.io/PFO2-FRONT-END/)**
+**[🔗 Visitar el sitio →](https://juliomorales-cell.github.io/PFO2-FRONT-END/)**
 
 | Página | Enlace |
 |--------|--------|
