@@ -1,25 +1,19 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/status-active-success.svg" alt="Status">
-  <img src="https://img.shields.io/badge/version-1.0.0-blue.svg" alt="Version">
+  <img src="https://img.shields.io/badge/status-development-yellow.svg" alt="Status">
+  <img src="https://img.shields.io/badge/version-0.1.0-blue.svg" alt="Version">
   <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License">
-  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
 </p>
 
 ---
 
 # 🚀 PFO2 FRONT END · DarkGrid
 
-> **Enterprise-grade Frontend Interface for the PFO2 System**
-
-<p align="center">
-  <img src="https://via.placeholder.com/1200x400/0a0a0a/00ff41?text=DARKGRID+SYSTEM" alt="DarkGrid Banner" width="100%">
-</p>
+> **Frontend Interface for the PFO2 System**
 
 ---
 
 ## 📋 Índice
 - [Acerca del Proyecto](#-acerca-del-proyecto)
-- [Arquitectura](#-arquitectura)
 - [Tecnologías](#-tecnologías)
 - [Instalación](#-instalación)
 - [Uso](#-uso)
@@ -33,36 +27,15 @@
 
 ## 🎯 Acerca del Proyecto
 
-**PFO2 FRONT END** es la interfaz de usuario de próxima generación para el sistema **DarkGrid**. Diseñado con un enfoque en la **seguridad**, **rendimiento** y **experiencia de usuario**, este frontend sirve como el punto de entrada principal para la plataforma PFO2.
+**PFO2 FRONT END** es la interfaz de usuario para el sistema **DarkGrid**. 
+Este proyecto contiene los archivos HTML, CSS y JavaScript que componen 
+la interfaz visual del sistema PFO2.
 
 ### ✨ Características Principales
-- 🎨 **Interfaz Dark Mode** - Diseño inmersivo con temática oscura
-- ⚡ **Rendimiento Optimizado** - Carga rápida y navegación fluida
-- 🔒 **Seguridad Integrada** - Autenticación y autorización robusta
-- 📱 **Responsivo** - Adaptable a todos los dispositivos
-- 🧩 **Modular** - Arquitectura escalable y mantenible
-- 🌐 **Cross-Browser** - Compatible con navegadores modernos
-
----
-
-## 🏗️ Arquitectura
-┌─────────────────────────────────────────────────────────┐
-│ CLIENTE │
-│ ┌───────────────────────────────────────────────────┐ │
-│ │ INTERFAZ DE USUARIO │ │
-│ │ ┌──────────┐ ┌──────────┐ ┌──────────────┐ │ │
-│ │ │ Dark │ │ Codex │ │ Antigravity │ │ │
-│ │ │ Grid │ │ Module │ │ Engine │ │ │
-│ │ └──────────┘ └──────────┘ └──────────────┘ │ │
-│ └───────────────────────────────────────────────────┘ │
-│ │ │
-│ ┌───────────────────────────────────────────────────┐ │
-│ │ AGENTS LAYER │ │
-│ │ (Configuración y orquestación de agentes) │ │
-│ └───────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────┘
-
-text
+- 🌑 **Temática Dark** - Diseño oscuro e inmersivo
+- 📄 **Tres módulos** - Index, Codex y Antigravity
+- 🎨 **CSS Personalizado** - Estilos únicos y modernos
+- 📱 **Diseño Responsive** - Adaptable a diferentes pantallas (en desarrollo)
 
 ---
 
@@ -87,11 +60,11 @@ text
 ```bash
 git clone https://github.com/juliomorales-cell/PFO2-FRONT-END.git
 cd PFO2-FRONT-END
-
+Configuración local
+bash
 # No se requiere instalación de dependencias
 # El proyecto es 100% HTML/CSS/JS nativo
-
-Uso
+🚀 Uso
 Desarrollo local
 Abre index.html en tu navegador preferido
 
@@ -103,6 +76,8 @@ Navega por los diferentes módulos:
 
 🌀 Antigravity.html - Módulo Antigravity
 
+Opciones de despliegue
+bash
 # Opción 1: Servidor HTTP simple (Python)
 python -m http.server 8000
 
@@ -111,7 +86,8 @@ python -m http.server 8000
 
 # Opción 3: GitHub Pages
 # Configurar en Settings → Pages (rama master)
-
+📂 Estructura del Proyecto
+text
 PFO2 FRONT END/
 │
 ├── 📁 .agents/                    # Configuración de agentes
@@ -124,29 +100,26 @@ PFO2 FRONT END/
 │
 ├── 📄 README.md                   # 📝 Esta documentación
 └── 📄 .gitignore                  # 🚫 Archivos ignorados
-
 📅 Roadmap
-✅ Versión 1.0.0 (Actual)
+✅ Versión 0.1.0 (Actual)
 Interfaz DarkGrid principal
 
 Módulo Codex funcional
 
-Engine Antigravity
+Módulo Antigravity
 
-Estilos responsive
+Estilos base
 
 🔜 Próximas funcionalidades
-Autenticación de usuarios
+Mejorar diseño responsive
 
-Dashboard de métricas
+Agregar más interactividad con JavaScript
 
-Panel de administración
+Optimizar rendimiento
 
-Integración con API REST
+Documentación completa del código
 
-Modo offline con Service Workers
-
-Pruebas unitarias y E2E
+Pruebas de compatibilidad
 
 🤝 Contribuciones
 ¡Las contribuciones son bienvenidas! Sigue estos pasos:
@@ -161,22 +134,19 @@ Push a la rama (git push origin feature/AmazingFeature)
 
 Abre un Pull Request
 
+Guía de estilo
+html
 <!-- Comentarios claros y descriptivos -->
-<!-- HTML semántico -->
-<article>
-  <section>
-    <!-- Contenido -->
-  </section>
-</article>
-
-/* CSS modular y organizado */
+<!-- Usar HTML semántico siempre que sea posible -->
+css
+/* CSS organizado por módulos */
 .module-name {
   /* Propiedades */
 }
-
-Autor
+👤 Autor
 Julio Morales
-Software Architect & Full Stack Developer
+
+GitHub: @juliomorales-cell
 
 📄 Licencia
 Distribuido bajo la licencia MIT. Ver LICENSE para más información.
@@ -189,8 +159,4 @@ Copyright (c) 2024 Julio Morales
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction...
-
-⭐ Apoya el proyecto
-Si este proyecto te ha sido útil, ¡considera darle una ⭐ en GitHub!
-
 <p align="center"> <sub>Desarrollado con ❤️ por Julio Morales</sub> </p> ```
